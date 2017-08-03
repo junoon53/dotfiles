@@ -60,10 +60,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " ident-guides
-set ts=2 sw=2 et
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_enable_on_vim_startup = 1
+"set ts=2 sw=2 et
+"let g:indent_guides_start_level=2
+"let g:indent_guides_guide_size=1
+"let g:indent_guides_enable_on_vim_startup = 1
 
 " disable modelines (a form of scripting) to fix a security hole
 set modelines=0
@@ -152,6 +152,7 @@ set ruler
 
 " enable relative line numbering
 set rnu
+set number
 
 " visual background and colorscheme
 set background=dark
