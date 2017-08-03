@@ -30,6 +30,7 @@
 
 " General Options
 " ---------------
+let $VIMRUNTIME="/home/vpawar/.vim"
 
 "if $COLORTERM == 'gnome-terminal'
 set t_Co=256
@@ -42,7 +43,7 @@ set encoding=utf8
 set nocompatible
 
 " pathogen
-filetype off
+filetype on
 execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
@@ -60,10 +61,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " ident-guides
-set ts=2 sw=2 et
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_enable_on_vim_startup = 1
+"set ts=2 sw=2 et
+"let g:indent_guides_start_level=2
+"let g:indent_guides_guide_size=1
+"let g:indent_guides_enable_on_vim_startup = 1
 
 " disable modelines (a form of scripting) to fix a security hole
 set modelines=0
@@ -80,8 +81,8 @@ set ttyfast
 "let g:Powerline_colorscheme = 'solarized256'
 
 " powerline configuration
-set rtp+=$HOME/workspaces/powerline/powerline/bindings/vim/
-set fillchars+=stl:\ ,stlnc:\
+"set rtp+=$HOME/workspaces/powerline/powerline/bindings/vim/
+"set fillchars+=stl:\ ,stlnc:\
 
 " vim-airline configuration
 "let g:airline_detect_modified=1
@@ -152,6 +153,7 @@ set ruler
 
 " enable relative line numbering
 set rnu
+set number
 
 " visual background and colorscheme
 set background=dark
