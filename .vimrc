@@ -76,13 +76,13 @@ set ttyfast
 "set hidden
 "
 " vim-powerline configuration
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_theme = 'solarized256'
-"let g:Powerline_colorscheme = 'solarized256'
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_theme = 'solarized256'
+let g:Powerline_colorscheme = 'solarized256'
 
 " powerline configuration
-"set rtp+=$HOME/workspaces/powerline/powerline/bindings/vim/
-"set fillchars+=stl:\ ,stlnc:\
+set rtp+=$HOME/workspaces/powerline/powerline/bindings/vim/
+set fillchars+=stl:\ ,stlnc:\
 
 " vim-airline configuration
 "let g:airline_detect_modified=1
@@ -121,7 +121,7 @@ autocmd! bufwritepost key_bindings.vim source $HOME/.vimrc
 autocmd! bufwritepost abbrevations.vim SOURCE $HOME/.vimrc
 
 " add json file type - the same syntax/snippets as javascript
-au BufNewFile,BufRead *.json set filetype=javascript
+"au BufNewFile,BufRead *.json set filetype=javascript
 
 " folding in markdown
 au BufEnter *.markdown setlocal foldexpr=MarkdownLevel()
@@ -165,7 +165,7 @@ set laststatus=2
 set ch=1
 
 " don't show the current mode
-set noshowmode 
+"set noshowmode 
 
 " show tab characters as >.
 set list 
