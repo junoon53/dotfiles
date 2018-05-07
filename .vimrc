@@ -18,7 +18,7 @@
 "   * nerdCommenter (used for easy commenting in many languages)
 "   * vim-airline (powerful replacement for the status line)
 "   * fugitive (lets your run git commands in vim)	
-"   * syntastic (syntax checker)
+"   * ale (syntax checker)
 "   * vim-surround (easily change 'surrounds' such as parentheses and quotes
 "   * indent-guides (adds vertical indent lines)
 "-------------------------------------------------------------------------------
@@ -47,23 +47,38 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
-" syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+" ultisnips
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:ycm_python_binary_path = '/home/vikram/workspaces/anaconda2/bin/python'
+
+
+" Ale (syntax checker)
+" Check Python files with flake8 and pylint.
+let g:ale_linters = ['flake8', 'pylint']
+" Fix Python files with autopep8 and yapf.
+let g:ale_fixers = ['autopep8', 'yapf']
+" Disable warnings about trailing whitespace for Python files.
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_sign_column_always = 1
+
 
 " ident-guides
-"set ts=2 sw=2 et
-"let g:indent_guides_start_level=2
-"let g:indent_guides_guide_size=1
-"let g:indent_guides_enable_on_vim_startup = 1
+set ts=2 sw=2 et
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
 " disable modelines (a form of scripting) to fix a security hole
 set modelines=0
@@ -155,7 +170,9 @@ set rnu
 set number
 
 " visual background and colorscheme
+syntax enable
 set background=dark
+colorscheme solarized
 
 " status line is always shown
 set laststatus=2
@@ -256,4 +273,26 @@ function! MarkdownLevel()
     endif
 endfunction
 
+" Quick run via <F5>
+nnoremap <F5> :call <SID>compile_and_run()<CR>
 
+augroup SPACEVIM_ASYNCRUN
+    autocmd!
+    " Automatically open the quickfix window
+    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(15, 1)
+augroup END
+
+function! s:compile_and_run()
+    exec 'w'
+    if &filetype == 'c'
+        exec "AsyncRun! gcc % -o %<; time ./%<"
+    elseif &filetype == 'cpp'
+       exec "AsyncRun! g++ -std=c++11 % -o %<; time ./%<"
+    elseif &filetype == 'java'
+       exec "AsyncRun! javac %; time java %<"
+    elseif &filetype == 'sh'
+       exec "AsyncRun! time bash %"
+    elseif &filetype == 'python'
+       exec "AsyncRun! time python %"
+    endif
+endfunction
