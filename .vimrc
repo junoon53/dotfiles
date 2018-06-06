@@ -63,13 +63,14 @@ let g:ycm_python_binary_path = '/home/vikram/workspaces/anaconda2/bin/python'
 
 " Ale (syntax checker)
 " Check Python files with flake8 and pylint.
-let g:ale_linters = ['flake8', 'pylint']
+"let b:ale_linters = ['flake8']
 " Fix Python files with autopep8 and yapf.
-let g:ale_fixers = ['autopep8', 'yapf']
+"let g:ale_fixers = ['autopep8', 'yapf']
 " Disable warnings about trailing whitespace for Python files.
 let g:ale_warn_about_trailing_whitespace = 0
 let g:ale_sign_column_always = 1
-
+let g:ale_python_flake8_args = '--ignore=E,W,F403,F405 --select=F,C'
+let g:ale_lint_on_enter = 1
 
 " ident-guides
 set ts=2 sw=2 et
@@ -170,9 +171,9 @@ set rnu
 set number
 
 " visual background and colorscheme
-syntax enable
-set background=dark
-colorscheme solarized
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
 " status line is always shown
 set laststatus=2
